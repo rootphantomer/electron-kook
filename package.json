@@ -1,0 +1,27 @@
+{
+  "name": "electron-kook",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron src/main.js",
+    "pack": "electron-builder --dir",
+    "dist:linux": "electron-builder --linux AppImage",
+    "dist:macOS": "electron-builder --mac",
+    "dist:win": "electron-builder --win",
+    "postinstall": "electron-builder install-app-deps",
+    "publish": "build -p always"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "kook",
+    "开黑啦"
+  ],
+  "author": "ph4nt0mer",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^20.2.0",
+    "electron-builder": "^23.6.0"
+  }
+}

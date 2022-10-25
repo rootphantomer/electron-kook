@@ -1,43 +1,73 @@
-// Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
+const { app } = require("electron");
+const MainController = require("./controller/main-controller");
+const AppTrayController = require("./controller/app-tray-controller");
 
-function createWindow () {
-    // Create the browser window.
-    const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+class ElectronWechat {
+  constructor() {
+    this.mainController = null;
+    this.tray = null;
+  }
+
+  // init method, the entry point of the app.
+  init() {
+    const lock = app.requestSingleInstanceLock();
+    if (!lock) {
+      app.quit();
+    } else {
+      app.on("second-instance", (event, commandLine, workingDirectory) => {
+        if (this.mainController) this.mainController.show();
+      });
+
+      this.initApp();
+    }
+  }
+
+  // init the main app.
+  initApp() {
+    // This method will be called when Electron has finished initialization and is
+    // ready to create browser windows. Some APIs can only be used after this event
+    // occurs.
+    app.on("ready", () => {
+      this.mainController = new MainController();
+      this.tray = new AppTrayController(this.mainController);
+
+      // Quit when all windows are closed.
+      app.on("window-all-closed", () => {
+        // On OS X it is common for applications and their menu bar to stay active until
+        // the user quits explicitly with Cmd + Q
+        if (process.platform !== "darwin") {
+          app.quit();
         }
-    })
+      });
 
-    // and load the index.html of the app.
-    mainWindow.loadFile('index.html')
+      app.on("before-quit", () => {
+        this.tray.tray.destroy();
+      });
 
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+      app.on("quit", () => {
+        // empty cover cache folder before exit.
+        // fs.remove(`${app.getPath('userData')}/covers`);
+      });
+
+      app.on("activate", () => {
+        // On OS X it's common to re-create a window in the app when the dock icon is
+        // clicked and there are no other windows open.
+        if (this.mainController === null) {
+          this.mainController = new MainController();
+        } else {
+          this.mainController.show();
+        }
+      });
+    });
+    app.on(
+      "certificate-error",
+      function (event, webContents, url, error, certificate, callback) {
+        event.preventDefault();
+        console.log("certificate-error");
+        callback(true);
+      }
+    );
+  }
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
-    createWindow()
-
-    app.on('activate', function () {
-        // On macOS it's common to re-create a window in the app when the
-        // dock icon is clicked and there are no other windows open.
-        if (BrowserWindow.getAllWindows().length === 0) createWindow()
-    })
-})
-
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') app.quit()
-})
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+new ElectronWechat().init();
