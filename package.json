@@ -21,7 +21,7 @@
   "author": "ph4nt0mer",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^20.2.0",
+    "electron": "^21.2.0",
     "electron-builder": "^23.6.0"
   }
 }
