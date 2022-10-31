@@ -10,7 +10,9 @@
     "dist:macOS": "electron-builder --mac",
     "dist:win": "electron-builder --win",
     "postinstall": "electron-builder install-app-deps",
-    "publish": "build -p always"
+    "publish": "electron-builder -p always",
+    "build": "yarn build-all",
+    "release": "yarn build-all && electron-builder --mac --windows --publish always"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -22,7 +24,7 @@
   "license": "MIT",
   "build": {
     "productName": "electron-kook",
-    "appId": "electron.kook",
+    "appId": "rootphantomer.electron.kook",
     "copyright": "electron-kook",
     "directories": {
       "output": "dist"
