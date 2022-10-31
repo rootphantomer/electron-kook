@@ -56,10 +56,12 @@ class MainController {
 
         // triggering when user try to close the play window.
         this.window.on("close", (e) => {
-            if (this.window.isVisible()) {
-                e.preventDefault();
-                this.window.hide();
-            }
+            // if (this.window.isVisible()) {
+            //     e.preventDefault();
+            //     this.window.hide();
+            // }
+            this.window = null;
+            //fix windows hide change quit
         });
 
         // this.window.webContents.setWindowOpenHandler(this.openInBrowser);
