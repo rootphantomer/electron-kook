@@ -1,6 +1,6 @@
 {
   "name": "electron-kook",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A minimal Electron application",
   "main": "src/main.js",
   "scripts": {
@@ -20,6 +20,18 @@
   ],
   "author": "ph4nt0mer",
   "license": "MIT",
+  "build": {
+    "productName": "electron-kook",
+    "appId": "electron.kook",
+    "copyright": "electron-kook",
+    "directories": {
+      "output": "dist"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true
+    }
+  },
   "devDependencies": {
     "electron": "^21.2.0",
     "electron-builder": "^23.6.0"
