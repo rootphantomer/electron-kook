@@ -27,32 +27,31 @@ class ElectronWechat {
         // occurs.
         app.on("ready", () => {
             this.mainController = new MainController();
+        });
 
-            // Quit when all windows are closed.
-            app.on("window-all-closed", () => {
-                // On OS X it is common for applications and their menu bar to stay active until
-                // the user quits explicitly with Cmd + Q
-                if (process.platform !== "darwin") {
-                    app.quit();
-                }
-            });
+        // Quit when all windows are closed.
+        app.on("window-all-closed", () => {
+            // On OS X it is common for applications and their menu bar to stay active until
+            // the user quits explicitly with Cmd + Q
+            if (process.platform !== "darwin") {
+                app.quit();
+            }
+        });
 
 
+        app.on("quit", () => {
+            // empty cover cache folder before exit.
+            // fs.remove(`${app.getPath('userData')}/covers`);
+        });
 
-            app.on("quit", () => {
-                // empty cover cache folder before exit.
-                // fs.remove(`${app.getPath('userData')}/covers`);
-            });
-
-            app.on("activate", () => {
-                // On OS X it's common to re-create a window in the app when the dock icon is
-                // clicked and there are no other windows open.
-                if (this.mainController === null) {
-                    this.mainController = new MainController();
-                } else {
-                    this.mainController.show();
-                }
-            });
+        app.on("activate", () => {
+            // On OS X it's common to re-create a window in the app when the dock icon is
+            // clicked and there are no other windows open.
+            if (this.mainController === null) {
+                this.mainController = new MainController();
+            } else {
+                this.mainController.show();
+            }
         });
         app.on(
             "certificate-error",
