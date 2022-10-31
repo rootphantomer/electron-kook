@@ -12,7 +12,7 @@
     "postinstall": "electron-builder install-app-deps",
     "publish": "electron-builder -p always",
     "build": "yarn build-all",
-    "release": "yarn build-all && electron-builder --mac --windows --publish always"
+    "release": "electron-builder --mac --windows --publish always"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
