@@ -23,6 +23,7 @@ class MainController {
             resizable: true,
             icon: path.join(__dirname, "./static/favicon.ico"),
             webPreferences: {
+                preload: path.join(__dirname, "./src/controller/preload.js"),
                 webSecurity: false,
                 nodeIntegration: false,
                 contextIsolation: false,
@@ -55,7 +56,7 @@ class MainController {
         });
 
         // triggering when user try to close the play window.
-        this.window.on("close", (e) => {
+        this.window.on("close", () => {
             // if (this.window.isVisible()) {
             //     e.preventDefault();
             //     this.window.hide();
