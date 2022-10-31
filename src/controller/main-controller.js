@@ -22,6 +22,7 @@ class MainController {
             frame: true,
             autoHideMenuBar: true,
             resizable: true,
+            icon: path.join(__dirname, "./static/favicon.ico"),
             webPreferences: {
                 webSecurity: false,
                 nodeIntegration: false,
@@ -29,7 +30,7 @@ class MainController {
                 enableRemoteModule: true,
             },
         });
-    // 是否打开开发工具
+        // 是否打开开发工具
         // this.window.webContents.openDevTools();
 
         this.window.loadURL("https://www.kookapp.cn/app/login", {
@@ -117,7 +118,7 @@ class MainController {
     handleRequest(details) {
         // console.log(details.url)
         details.url.startsWith("https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxinit") &&
-            this.login();
+        this.login();
         details.url.startsWith(
             "https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxinit"
         ) && this.login();

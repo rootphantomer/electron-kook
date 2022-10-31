@@ -3,3 +3,4 @@
 .idea/
 dist/*
 package-lock.json
+out/
