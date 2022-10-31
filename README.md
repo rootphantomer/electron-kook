@@ -1,13 +1,13 @@
 # electron-kook
 
-运行
+编译打包
 
 ```bash
-
-cnpm run start
+npm install
+npx electron-forge import
+npm run make
 ```
 
-打包builder正在研究。
+已知问题:
 
-bug:
 - 目前只支持短信验证码和账号密码登录，暂不支持微信扫码登录
