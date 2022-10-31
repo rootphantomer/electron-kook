@@ -1,5 +1,7 @@
 # electron-kook
 
+利用electron技术封装了kook-web的mac下软件。
+
 编译打包
 
 ```bash
