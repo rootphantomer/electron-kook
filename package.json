@@ -17,7 +17,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "github:rootphantomer/electron-kook",
   "keywords": [
     "Electron",
     "kook",
@@ -34,17 +34,13 @@
     ],
     "mac": {
       "icon": "./static/favicon.ico",
+      "type": "development",
       "category": "electron.kook",
       "artifactName": "${productName}_${version}.${ext}",
       "target": [
         "dmg",
         "zip"
-      ],
-      "hardenedRuntime": true,
-      "entitlements": "entitlements.mac.plist",
-      "extendInfo": {
-        "NSMicrophoneUsageDescription": "请允许本程序访问您的麦克风"
-      }
+      ]
     },
     "nsis": {
       "oneClick": false,

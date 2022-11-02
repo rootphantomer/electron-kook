@@ -64,6 +64,15 @@ class MainController {
             this.window = null;
             //fix windows hide change quit
         });
+        
+        this.window.on("closed", () => {
+            // if (this.window.isVisible()) {
+            //     e.preventDefault();
+            //     this.window.hide();
+            // }
+            this.window = null;
+            //fix windows hide change quit
+        });
 
         // this.window.webContents.setWindowOpenHandler(this.openInBrowser);
 
