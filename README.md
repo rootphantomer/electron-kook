@@ -9,6 +9,10 @@ npm install
 npx electron-forge import
 npm run make
 ```
+或者
+```
+npm run app:dist
+```
 
 已知问题:
 
