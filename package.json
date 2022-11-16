@@ -10,14 +10,16 @@
     "dist:macOS": "electron-builder --mac",
     "dist:win": "electron-builder --win",
     "postinstall": "electron-builder install-app-deps",
-    "publish": "electron-builder -p always",
+    "publish": "electron-forge publish",
     "release": "electron-builder --mac --windows --publish always",
     "electron": "electron",
     "dist": "electron-builder",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "github:rootphantomer/electron-kook",
   "keywords": [
     "Electron",
     "kook",
@@ -32,22 +34,51 @@
     "files": [
       "!dist/**/*"
     ],
-    "mac": {
-      "icon": "./static/favicon.ico",
-      "category": "electron.kook",
-      "artifactName": "${productName}_${version}.${ext}",
-      "target": [
-        "dmg",
-        "zip"
+    "electronDownload": {
+      "mirror": "https://registry.npmmirror.com/binary.html?path=electron/  "
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
       ]
     },
-    "nsis": {
-      "oneClick": false,
-      "allowElevation": true,
-      "createDesktopShortcut": "always",
-      "allowToChangeInstallationDirectory": true
+    "mac": {
+      "icon": "build/icons/icon.icns",
+      "hardenedRuntime": true,
+      "entitlements": "entitlements.mac.plist",
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "授权访问麦克风",
+        "NSCameraUsageDescription": "授权访问摄像头"
+      }
     },
     "extends": null
+  },
+  "config": {
+    "forge": {
+      "publishers": [
+        {
+          "name": "@rootphantomer/electron-kook",
+          "config": {
+            "repository": {
+              "owner": "rootphantomer",
+              "name": "electron-kook"
+            },
+            "prerelease": false,
+            "draft": true
+          }
+        }
+      ]
+    }
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.70",
@@ -55,10 +86,14 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.70",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.70",
     "@electron-forge/maker-zip": "^6.0.0-beta.70",
+    "@electron-forge/publisher-github": "^6.0.0-beta.70",
     "electron": "^21.2.0",
     "electron-builder": "^23.6.0"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
+  },
+  "resolutions": {
+    "upath": "^1.0.5"
   }
 }
