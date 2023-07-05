@@ -14,7 +14,7 @@ CssInjector.login = `
         left: 0 !important;
         margin: 0 !important;
     }
-`
+`;
 
 CssInjector.main = `
     .main {
@@ -78,6 +78,6 @@ CssInjector.main = `
     .mini .panel .ext {
         display: none;
     }
-`
+`;
 
-module.exports = CssInjector
+module.exports = CssInjector;
