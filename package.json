@@ -14,7 +14,7 @@
     "publish": "electron-forge publish",
     "release": "electron-builder --mac --windows --publish always",
     "electron": "electron",
-    "build": "electron-builder",
+    "build-all": "electron-builder",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "app:dir": "electron-builder --dir",

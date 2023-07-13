@@ -2,16 +2,18 @@
 
 利用electron技术封装了kook-web的mac下软件。
 
-编译打包
+编译
 
 ```bash
 npm install
 npx electron-forge import
 npm run make
 ```
-或者
-```
-npm run app:dist
+
+打包
+
+```bash
+npm run build
 ```
 
 已知问题:
@@ -23,8 +25,8 @@ npm run app:dist
 
 #### 2022年10月31日
 
-* 支持微信扫码登录
-* 修复无法结束进程
-* ~~修复可以听到声音和讲话~~
+- 支持微信扫码登录
+- 修复无法结束进程
+- ~~修复可以听到声音和讲话~~
 
 独立的app暂时没找到如何解决麦克风的问题。

@@ -11,16 +11,16 @@ jobs:
 
     strategy:
       matrix:
-        os: [ macos-latest, ubuntu-latest ]
+        os: [macos-latest, ubuntu-latest]
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@main
 
       - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@main
         with:
-          node-version: 18
+          node-version: "lts"
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
